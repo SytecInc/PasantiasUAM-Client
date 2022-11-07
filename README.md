@@ -1,3 +1,10 @@
+# Install libraries
+**Install SASS**\
+`yarn add node-sass`\
+**Install SASS**\
+`yarn add antd`
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

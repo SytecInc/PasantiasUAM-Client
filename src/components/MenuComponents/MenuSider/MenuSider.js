@@ -1,27 +1,34 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Layout, Menu } from "antd";
-import { HomeOutlined, UserOutlined } from "@ant-design/icons";
+import { HomeOutlined, UserOutlined, LoginOutlined } from "@ant-design/icons";
 import "./MenuSider.scss";
 
-export const MenuSider = (props) => {
+export default function MenuSider(props) {
     const { Sider } = Layout;
     const location = useLocation();
     const navigate = useNavigate();
     const menuItems = [
         {
-            key: "/admin",
+            key: "/",
             icon: <HomeOutlined />,
             label: <span className="nav-text">Home</span>,
         },
         {
-            key: "/admin/contact",
+            key: "/login",
+            icon: <LoginOutlined />,
+            label: <span className="nav-text">Login</span>,
+        },
+        {
+            key: "/contact",
             icon: <UserOutlined />,
             label: <span className="nav-text">Contact</span>,
         },
+        
     ];
     const menuClick = (e) => {
-        navigate(e.key);
+        const path = e.key;
+        navigate(path);
     };
     return (
         <Sider className="admin-sider" collapsed={props.menuCollapsed}>
@@ -35,4 +42,3 @@ export const MenuSider = (props) => {
         </Sider>
     );
 };
-export default MenuSider;

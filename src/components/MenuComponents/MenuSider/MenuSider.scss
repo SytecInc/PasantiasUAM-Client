@@ -1,10 +1,10 @@
-@import "../../../../src/scss/index.scss";
+@import "../../../scss/index.scss";
 
-.admin-sider {
-  background-color: $font-grey-light;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 65px;
-  overflow: auto;
-}
+.admin-sider{
+    position: fixed;
+    left: 0;
+    top: 65px;
+    height: 100vh;
+    overflow: auto;
+    background-color: $font-grey-light;
+} 
