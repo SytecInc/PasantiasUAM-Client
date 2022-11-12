@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Input, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined  } from "@ant-design/icons";
-import { signUpApi } from "../../../api/user.js"
+import { signUp } from "../../../api/user.js"
 import "./Register.scss";
 import { emailValidation, minLengthValidation } from "../../../validations/FormValidations";
 
@@ -35,7 +35,6 @@ export default function RegisterForm() {
     };
 
     const inputValidation = (e) => {
-        console.log(formValid)
         const { type, name } = e.target;
 
         if (type === "email") {
@@ -52,7 +51,6 @@ export default function RegisterForm() {
 
     const register = async (e) => {
         e.preventDefault();
-        console.log("Estoy en register");
         
         const emailVal = inputs.email;
         const passwordVal = inputs.password;
@@ -63,29 +61,25 @@ export default function RegisterForm() {
             notification["error"]({
                 message: "Todos los campos son obligatorios",
             });
-
-        console.log("Vacíos");
         } else {
             if (passwordVal !== repeatPasswordVal) {
                 notification["error"]({
-                message: "Las contraseñas tienen que ser iguales.",
-        });
-        console.log("Son diferentes");
-        } else {
-        const result = await signUpApi(inputs);
-        console.log(result)
-        if (!result.user_creado) {
-            notification["error"]({
-                message: result.message,
-            });
-        } else {
-            notification["success"]({
-                message: result.message,
-            });
+                    message: "Las contraseñas tienen que ser iguales.",
+                });
+            } else {
+                const result = await signUp(inputs);
+                if (!result.user_created) {
+                    notification["error"]({
+                        message: result.message,
+                    });
+                } else {
+                    notification["success"]({
+                        message: result.message,
+                    });
 
-            resetForm();
-        }
-        }
+                    resetForm();
+                }
+            }
         }
     };
 

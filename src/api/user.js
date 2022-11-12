@@ -1,10 +1,8 @@
 import { Result } from "antd";
 import { basePath, apiVersion, modelName } from "./config";
 
-export async function signUpApi(data) {
+export async function signUp(data) {
     const url = `${basePath}/${apiVersion}/${modelName}/signup`;
-
-    console.log(url);
 
     const params = {
         method: "POST",
@@ -22,19 +20,42 @@ export async function signUpApi(data) {
     .then((result) => {
         if (result.user) {
             return {
-                user_creado: true,
-                message: "Usuario creado correctamente",
+                user_created: true,
+                message: "User created successfully",
             };
-        }
-        return {
-            user_creado: false,
-            message: result.message,
+        } else {
+            return {
+                user_created: false,
+                message: result.message,
+            }
         }
     })
     .catch((err) => {
         return {
-            user_creado: false,
-            message: result.message,
+            user_created: false,
+            message: err.message,
         }
+    });
+}
+
+export async function signIn(data) {
+    const urL = `${basePath}/${apiVersion}/${modelName}/signin`;
+    const params = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+
+    return fetch(urL, params)
+    .then((response) => {
+        return response.json();
+    })
+    .then((result) => {
+        return result;
+    })
+    .catch((err) => {
+        return err.message;
     });
 }
