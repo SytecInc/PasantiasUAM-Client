@@ -6,4 +6,4 @@
 
 ## Run project
 
-### `npm run build`
+### `yarn dev`
