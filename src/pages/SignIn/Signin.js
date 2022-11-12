@@ -3,7 +3,6 @@ import { Layout, Tabs } from "antd";
 import { Routes, Route } from "react-router-dom";
 import Login from  "../../components/MenuComponents/Login";
 import Register from  "../../components/MenuComponents/Register";
-import Logo from "../../assets/brand/img/Logo.png";
 import "./SignIn.scss";
 import { getAccessToken } from "../../api/auth";
 

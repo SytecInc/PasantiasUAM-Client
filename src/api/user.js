@@ -1,4 +1,3 @@
-import { Result } from "antd";
 import { basePath, apiVersion, modelName } from "./config";
 
 export async function signUp(data) {

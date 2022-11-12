@@ -5,7 +5,6 @@ import MenuSider from "../components/MenuComponents/MenuSider";
 import MenuTop from "../components/MenuComponents/MenuTop";
 import { GithubOutlined } from "@ant-design/icons";
 import SignIn from "../pages/SignIn/Signin";
-import { getAccessToken, getRefreshToken } from "../api/auth";
 import useAuth from "../hooks/useAuth";
 
 import "./GeneralLayout.scss";
@@ -15,8 +14,6 @@ export default function GeneralLayout(props) {
     const { Header, Content, Footer} = Layout;
     const { children } = props;
     const { user, isLoading } = useAuth();
-    const accessToken = getAccessToken();
-    const refreshToken = getRefreshToken();
 
     if (!user && !isLoading) {
         return (
