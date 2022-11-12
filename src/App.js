@@ -1,26 +1,27 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import projectRoutes from './config/routes';
+import miroutes from "./config/routes";
+import AuthProvider from './providers/authProvider';
 import './App.scss';
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {projectRoutes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={
-              <route.layout>
-                <route.component/>
-              </route.layout>
-            }
-          />
-        ))}
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {miroutes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <route.layout>
+                  <route.component />
+                </route.layout>
+              }
+            />
+          ))}
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
-
-export default App;
