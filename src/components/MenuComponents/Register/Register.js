@@ -7,7 +7,11 @@ import { emailValidation, minLengthValidation } from "../../../validations/FormV
 
 export default function RegisterForm() {
     const [inputs, setInputs] = useState({
+        name: "",
+        lastname: "",
+        govId: "",
         email: "",
+        phone: "",
         password: "",
         repeatPassword: "",
         privacyPolicy: false,
@@ -52,12 +56,16 @@ export default function RegisterForm() {
     const register = async (e) => {
         e.preventDefault();
         
+        const nameVal = inputs.name;
+        const lastnameVal = inputs.lastname;
+        const govIdVal = inputs.govId;
         const emailVal = inputs.email;
+        const phoneVal = inputs.phone;
         const passwordVal = inputs.password;
         const repeatPasswordVal = inputs.repeatPassword;
         const privacyPolicyVal = inputs.privacyPolicy;
 
-        if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
+        if (!nameVal || !lastnameVal || !govIdVal || !emailVal || !phoneVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
             notification["error"]({
                 message: "Todos los campos son obligatorios",
             });
@@ -92,7 +100,11 @@ export default function RegisterForm() {
         }
         
         setInputs({
+            name: "",
+            lastname: "",
+            govId: "",
             email: "",
+            phone: "",
             password: "",
             repeatPassword: "",
             privacyPolicy: false,
@@ -111,7 +123,38 @@ export default function RegisterForm() {
         <Form className="register-form" onChange={changeForm}>
             <Form.Item>
                 <Input
-                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }}/>
+                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                    type="text"
+                    name="name"
+                    placeholder="Nombre"
+                    className="register-form__input"
+                    value={inputs.name}
+                />
+            </Form.Item>
+            <Form.Item>
+                <Input
+                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                    type="text"
+                    name="lastname"
+                    placeholder="Apellido"
+                    className="register-form__input"
+                    value={inputs.lastname}
+                />
+            </Form.Item>
+            <Form.Item>
+                <Input
+                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                    type="text"
+                    name="govId"
+                    placeholder="Cédula"
+                    className="register-form__input"
+                    value={inputs.govId}
+                />
+            </Form.Item>
+            <br />
+            <Form.Item>
+                <Input
+                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />
                     }
                     type="email"
                     name="email"
@@ -119,6 +162,16 @@ export default function RegisterForm() {
                     className="register-form__input"
                     onChange={inputValidation}
                     value={inputs.email}
+                />
+            </Form.Item>
+            <Form.Item>
+                <Input
+                    prefix={<UserOutlined style={{ color: "rgba(0,0,0,.25)" }} />}
+                    type="text"
+                    name="phone"
+                    placeholder="Teléfono"
+                    className="register-form__input"
+                    value={inputs.phone}
                 />
             </Form.Item>
             <Form.Item>

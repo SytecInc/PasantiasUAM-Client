@@ -22,13 +22,13 @@ export default function Login() {
     const login = async (e) => {
         e.preventDefault();
         const result = await signIn(inputs);
-
+        
         if (result.message) {
             notification["error"]({
                 message: result.message,
             });
         } else {
-            const { accessToken, refreshToken } = result;
+            const { accessToken, refreshToken } = result.data;
             localStorage.setItem(ACCESS_TOKEN, accessToken);
             localStorage.setItem(REFRESH_TOKEN, refreshToken);
             notification["success"]({
