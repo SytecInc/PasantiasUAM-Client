@@ -1,7 +1,7 @@
-import { basePath, apiVersion, modelName } from "./config";
+import { serverPath, apiVersion, modelName } from "./config";
 
 export async function signUp(data) {
-    const url = `${basePath}/${apiVersion}/${modelName}/signup`;
+    const url = `${serverPath}/${apiVersion}/${modelName}`;
 
     const params = {
         method: "POST",
@@ -17,7 +17,7 @@ export async function signUp(data) {
         return response.json();
     })
     .then((result) => {
-        if (result.user) {
+        if (result.data) {
             return {
                 user_created: true,
                 message: "User created successfully",
@@ -38,7 +38,7 @@ export async function signUp(data) {
 }
 
 export async function signIn(data) {
-    const urL = `${basePath}/${apiVersion}/${modelName}/signin`;
+    const urL = `${serverPath}/${apiVersion}/login`;
     const params = {
         method: "POST",
         body: JSON.stringify(data),

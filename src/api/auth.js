@@ -1,6 +1,6 @@
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 import jwtDecode from "jwt-decode";
-import { basePath, apiVersion } from "./config";
+import { serverPath, apiVersion } from "./config";
 
 const validateToken = (token) => {
     if (!token || token === null) {
@@ -37,7 +37,7 @@ export function logout() {
 }
 
 export function refreshAccessToken(refreshToken) {
-    const url = `${basePath}/${apiVersion}/refresh-token`;
+    const url = `${serverPath}/${apiVersion}/refresh-token`;
     const bodyObj = {
         refreshToken: refreshToken,
     };
