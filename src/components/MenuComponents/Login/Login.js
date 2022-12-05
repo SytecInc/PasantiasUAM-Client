@@ -22,10 +22,15 @@ export default function Login() {
     const login = async (e) => {
         e.preventDefault();
         const result = await signIn(inputs);
-        
-        if (result.message) {
+        if (result.errors) {
+            result.errors.forEach(function(error) {
+                notification["error"]({
+                    message: error.msg+". Inavlid "+error.param+".",
+                });
+            });
+        } else if (result.error) {
             notification["error"]({
-                message: result.message,
+                message: result.error,
             });
         } else {
             const { accessToken, refreshToken } = result.data;

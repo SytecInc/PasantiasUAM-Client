@@ -3,6 +3,8 @@ import { Form, Button, Input, Checkbox, notification } from "antd";
 import { UserOutlined, LockOutlined  } from "@ant-design/icons";
 import { signUp } from "../../../api/user.js"
 import "./Register.scss";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../../../api/constants";
+import { signIn } from "../../../api/user";
 import { emailValidation, minLengthValidation } from "../../../validations/FormValidations";
 
 export default function RegisterForm() {
@@ -76,14 +78,44 @@ export default function RegisterForm() {
                 });
             } else {
                 const result = await signUp(inputs);
-                if (!result.user_created) {
-                    notification["error"]({
-                        message: result.message,
+                if (result.errors) {
+                    result.errors.forEach(error => {
+                        notification["error"]({
+                            message: error.msg,
+                        });
                     });
-                } else {
+                } else if (result.error) {
+                    notification["error"]({
+                        message: result.error,
+                    });
+                } else if (result.user_created) {
                     notification["success"]({
                         message: result.message,
                     });
+
+                    const loginResult = await signIn({
+                        email: inputs.email,
+                        password: inputs.password,
+                    });
+                    if (loginResult.errors) {
+                        loginResult.errors.forEach(function(error) {
+                            notification["error"]({
+                                message: error.msg+". Inavlid "+error.param+".",
+                            });
+                        });
+                    } else if (loginResult.error) {
+                        notification["error"]({
+                            message: loginResult.error,
+                        });
+                    } else {
+                        const { accessToken, refreshToken } = loginResult.data;
+                        localStorage.setItem(ACCESS_TOKEN, accessToken);
+                        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+                        notification["success"]({
+                            message: "Login correcto.",
+                        });
+                        window.location.href = "/";
+                    }
 
                     resetForm();
                 }

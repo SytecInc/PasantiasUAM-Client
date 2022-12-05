@@ -22,19 +22,10 @@ export async function signUp(data) {
                 user_created: true,
                 message: "User created successfully",
             };
-        } else {
-            return {
-                user_created: false,
-                message: result.message,
-            }
+        } else if (result.errors) {
+            return result
         }
     })
-    .catch((err) => {
-        return {
-            user_created: false,
-            message: err.message,
-        }
-    });
 }
 
 export async function signIn(data) {
@@ -55,6 +46,6 @@ export async function signIn(data) {
         return result;
     })
     .catch((err) => {
-        return err.message;
+        return err;
     });
 }
