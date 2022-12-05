@@ -1,9 +1,9 @@
-# PasantiasUAM-Client
+# PasantiasUAM Client
 
-## Install dependencies
+## Install libraries
 
-### `yarn install`
+`yarn install`
 
 ## Run project
 
-### `yarn dev`
+`yarn dev`
