@@ -1,1 +1,1 @@
-export { default } from "./Admin";
+export { AdminHome } from './AdminHome';

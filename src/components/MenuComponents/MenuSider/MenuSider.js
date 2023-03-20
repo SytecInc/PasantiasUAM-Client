@@ -1,39 +1,37 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { Layout, Menu } from "antd";
-import { HomeOutlined, UserOutlined} from "@ant-design/icons";
-import "./MenuSider.scss";
+import React from 'react';
+import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import './MenuSider.scss';
+const { Sider } = Layout;
 
-export default function MenuSider(props) {
-    const { Sider } = Layout;
-    const location = useLocation();
-    const navigate = useNavigate();
-    const menuItems = [
-        {
-            key: "/",
-            icon: <HomeOutlined />,
-            label: <span className="nav-text">Home</span>,
-        },
-        {
-            key: "/contact",
-            icon: <UserOutlined />,
-            label: <span className="nav-text">Contact</span>,
-        },
-        
-    ];
-    const menuClick = (e) => {
-        const path = e.key;
-        navigate(path);
+export const MenuSider = () => {
+  const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
+    const key = String(index + 1);
+    return {
+      key: `sub${key}`,
+      icon: React.createElement(icon),
+      label: `subnav ${key}`,
+      children: new Array(4).fill(null).map((_, j) => {
+        const subKey = index * 4 + j + 1;
+        return {
+          key: subKey,
+          label: `option${subKey}`,
+        };
+      }),
     };
-    return (
-        <Sider className="admin-sider" collapsed={props.menuCollapsed}>
-            <Menu
-                theme="aliceblue"
-                mode="inline"
-                defaultSelectedKeys={[location.pathname]}
-                onClick={menuClick}
-                items={menuItems}
-            />
-        </Sider>
-    );
-};
+  });
+  return (
+    <Sider
+      className='sider'
+      width={200}
+    >
+      <Menu
+        className='menu-sider'
+        mode="inline"
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        items={items2}
+      />
+    </Sider>
+  )
+}

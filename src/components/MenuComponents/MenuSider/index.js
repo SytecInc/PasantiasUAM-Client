@@ -1,1 +1,1 @@
-export {default} from './MenuSider'
+export MenuSider from './MenuSider';

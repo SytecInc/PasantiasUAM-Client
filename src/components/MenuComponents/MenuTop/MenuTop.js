@@ -1,31 +1,25 @@
-import React from "react";
-import { Button } from "antd";
-import {
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    LogoutOutlined,
-} from "@ant-design/icons";
-import "./MenuTop.scss";
-import { logout } from "../../../api/auth";
+import React from 'react';
+import { Menu } from 'antd';
+import { AvatarDropdown } from '../AvatarDropdown';
+import './MenuTop.scss';
 
-export default function MenuTop(props) {
-    const { menuCollapsed, setMenuCollapsed } = props;
-    const userLogout = () => {
-        logout();
-        window.location.reload();
-    };
-    return (
-        <div className="menu-top">
-            <div className="menu-top__left">
-                <Button type="link" onClick={() => setMenuCollapsed(!menuCollapsed)}>
-                    {menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                </Button>
-            </div>
-            <div className="menu-top__right">
-            <Button type="link" onClick={userLogout}>
-                    <LogoutOutlined />
-                </Button>
-            </div>
-        </div>
-    );
+export const MenuTop = () => {
+  return (
+    <>
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['2']}
+        items={new Array(5).fill(null).map((_, index) => {
+          const key = index + 1;
+          return {
+            key,
+            label: `nav ${key}`,
+          };
+        })}
+      />
+      <AvatarDropdown />
+    </>
+  )
 }

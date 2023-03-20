@@ -1,20 +1,31 @@
-import Home from "../pages/home";
-import Contact from "../pages/contact";
-import NotFound from "../pages/notfound";
-import Signin from "../components/MenuComponents/Login";
-import GeneralLayout from "../layouts/GeneralLayout";
+//Page layouts
+import { GeneralLayout } from "../Layouts/GeneralLayout/GeneralLayout";
+import { LoginLayout } from "../Layouts/LoginLayout/LoginLayout";
 
-const routesAdmin = [
-    //{ path: "/admin/contact", layout: GeneralLayout, component: Contact },
-    //{ path: "/admin/login/", layout: GeneralLayout, component: AdminSignin},
+//Pages
+import { AdminHome } from "../pages/admin/AdminHome";
+import { Contact } from "../pages/Contact";
+import { Home } from "../pages/Home";
+import { NotFound } from "../pages/NotFound/NotFound";
+import { SignIn } from "../pages/SignIn/SignIn";
+
+const GeneralRoutes = [
+    { path: "/signin", component: SignIn, layout: LoginLayout },
+    { path: "*", component: NotFound, layout: LoginLayout},
+    { path: "/contact", component: Contact, layout: GeneralLayout },
 ];
 
-const routesGeneral = [
-    { path: "/login", layout: GeneralLayout, component: Signin },
-    { path: "/contact", layout: GeneralLayout, component: Contact },
-    { path: "/", layout: GeneralLayout, component: Home },
-    { path: "*", layout: GeneralLayout, component: NotFound },
+const StudentRoutes = [
+    { path: "/", component: Home, layout: GeneralLayout },
+]
+
+const AdminRoutes = [
+    { path: "/admin", component: AdminHome, layout: GeneralLayout }
 ];
 
-const projectRoutes = [...routesAdmin, ...routesGeneral];
-export default projectRoutes;
+const AuthRoutes = [...AdminRoutes, ...StudentRoutes];
+
+export {
+    GeneralRoutes,
+    AuthRoutes,
+};
