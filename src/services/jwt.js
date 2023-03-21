@@ -1,7 +1,7 @@
 import { apiCall } from "./http";
 import jwt_decode from "jwt-decode";
 
-export async function verifyToken(token) {
+export function verifyToken(token) {
     let decoded = null;
     try {
         decoded = jwt_decode(token);
@@ -15,7 +15,7 @@ export async function verifyToken(token) {
     return decoded;
 }
 
-export async function getToken() {
+export function getToken() {
     const token = localStorage.getItem("token");
     return token;
 }
