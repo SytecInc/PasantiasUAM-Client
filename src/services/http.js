@@ -9,6 +9,7 @@ const controller = new AbortController();
 export async function apiCall(method, url, data={}){
     
     const timeoutId = setTimeout(() => controller.abort(), timeout);
+    const token = localStorage.getItem('token');
     
     const options = {
         method: method,
@@ -18,17 +19,19 @@ export async function apiCall(method, url, data={}){
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': localStorage.getItem('token'),
+            'Authorization': !token ? null : token,
         },
     }
-    try {
-        const promise = await fetch(baseUrl+url, options);
-        clearTimeout(timeoutId);
-        return promise.json()
-    } catch (error) {
-        console.log("HTTP Request Timeout Error. ", error);
-    }
-    
-    
-    
+    return fetch(baseUrl+url, options)
+    .then(response => {
+        if (response.ok) {
+            clearTimeout(timeoutId);
+            return response.json();
+        } else {
+            throw new Error(response.status);
+        }
+    })
+    .then(data => {
+        return data;
+    })
 }

@@ -26,9 +26,9 @@ export async function logIn(values) {
         password: values.password,
     };
     apiCall("post", "/login", loginPayload)
-    .then(async response => {
+    .then(response => {
         const token = response.data.accessToken;
-        const decoded = await verifyToken(token)
+        const decoded = verifyToken(token)
         if (decoded !== null) {
             localStorage.setItem("token", token);
             if (decoded.role === "admin") {
@@ -39,6 +39,9 @@ export async function logIn(values) {
         } else {
             console.log("Cannot log in.");
         }
+    })
+    .catch(error => {
+        console.log("Network Error HTTP request: ", error);
     });
 }
 
