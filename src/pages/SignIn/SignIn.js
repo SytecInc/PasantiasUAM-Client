@@ -13,7 +13,7 @@ export const SignIn = () => {
   return (
     <div className="login-box">
       <div className="login-wrapper">
-        <img src={require("../../img/png/Logos_UAM-08.png")} alt="Login"/>
+        <img src={require("../../assets/img/png/Logos_UAM-08.png")} alt="Login"/>
       </div>
       <Form
         name="login-form"

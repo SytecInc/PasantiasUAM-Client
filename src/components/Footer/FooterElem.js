@@ -8,7 +8,7 @@ export const FooterElem = () => {
     <Footer
         className='footer'
       >
-        Ant Design ©2023 Created by Ant UED
+        UAM ©2023
       </Footer>
   )
 }

@@ -4,33 +4,47 @@ import { Layout, Menu } from 'antd';
 import './MenuSider.scss';
 const { Sider } = Layout;
 
-export const MenuSider = () => {
-  const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-    const key = String(index + 1);
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-    };
-  });
+export const MenuSider = (props) => {
+  const items = [
+    {
+      key: '1',
+      icon: <UserOutlined />,
+      label: 'nav 1',
+      children: [
+        {
+          key: '1-1',
+          label: 'option 1',
+        },
+        {
+          key: '1-2',
+          label: 'option 2',
+        },
+      ],
+    },
+    {
+      key: '2',
+      icon: <LaptopOutlined />,
+      label: 'nav 2',
+    },
+    {
+      key: '3',
+      icon: <NotificationOutlined />,
+      label: 'nav 3',
+    },
+  ];
+
   return (
     <Sider
       className='sider'
       width={200}
+      collapsed={props.menuCollapsed}
     >
       <Menu
         className='menu-sider'
         mode="inline"
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
-        items={items2}
+        items={items}
       />
     </Sider>
   )

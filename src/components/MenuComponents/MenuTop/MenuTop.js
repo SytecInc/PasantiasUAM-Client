@@ -1,25 +1,52 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu } from 'antd';
 import { AvatarDropdown } from '../AvatarDropdown';
 import './MenuTop.scss';
 
 export const MenuTop = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    navigate(e.key);
+  };
+
+  const menuItems = [
+    {
+      key: '/',
+      label: 'Home',
+    },
+    {
+      key: '/admin',
+      label: 'AdminHome',
+    },
+    {
+      key: '/contact',
+      label: 'Contact',
+    },
+  ];
+
   return (
-    <>
-      <div className="logo" />
+    <div className='menu-top-cont'>
+      <img 
+      className='menu-top__left-logo' 
+      src={require('../../../assets/img/png/Logos_UAM-09.png')}
+      >      
+      </img>
       <Menu
         theme="dark"
+        className='menu-top'
         mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={new Array(5).fill(null).map((_, index) => {
-          const key = index + 1;
+        selectedKeys={[location.pathname]}
+        items={menuItems.map((item) => {
           return {
-            key,
-            label: `nav ${key}`,
-          };
+            ...item,
+            onClick: handleClick,
+        };
         })}
       />
       <AvatarDropdown />
-    </>
+    </div>
   )
 }
