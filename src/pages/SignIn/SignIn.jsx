@@ -2,6 +2,8 @@ import React from 'react'
 import './SignIn.scss'
 import { Form, Input, Checkbox, Button } from 'antd';
 import { logIn } from "../../services/jwt";
+import uamLogo from '../../assets/img/png/Logos_UAM-08.png';
+
 const { Item } = Form;
 const { Password } = Input;
 
@@ -13,7 +15,7 @@ export const SignIn = () => {
   return (
     <div className="login-box">
       <div className="login-wrapper">
-        <img src={require("../../assets/img/png/Logos_UAM-08.png")} alt="Login"/>
+        <img src={uamLogo} alt="Login"/>
       </div>
       <Form
         name="login-form"

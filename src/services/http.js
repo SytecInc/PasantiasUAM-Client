@@ -1,37 +1,24 @@
 import {
-    SERVER_URL,
-    SERVER_API,
-    timeout
+    clientConfig
 } from "../config";
-const baseUrl = `${SERVER_URL}${SERVER_API}`;
-const controller = new AbortController();
+const baseUrl = `${clientConfig.SERVER_URL}${clientConfig.SERVER_API}`;
 
 export async function apiCall(method, url, data={}){
-    
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
     const token = localStorage.getItem('token');
-    
+
     const options = {
         method: method,
-        signal: controller.signal,
         mode: "cors",
-        body: JSON.stringify(data),
+        body: data !== {} ? JSON.stringify(data) : null,
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': !token ? null : token,
         },
     }
-    return fetch(baseUrl+url, options)
+    
+    return await fetch(baseUrl+url, options)
     .then(response => {
-        if (response.ok) {
-            clearTimeout(timeoutId);
-            return response.json();
-        } else {
-            throw new Error(response.status);
-        }
-    })
-    .then(data => {
-        return data;
-    })
+        return response.json();
+    });
 }

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu } from 'antd';
 import { AvatarDropdown } from '../AvatarDropdown';
 import './MenuTop.scss';
+import logo from '../../../assets/img/png/Logos_UAM-09.png';
 
 export const MenuTop = () => {
   const location = useLocation();
@@ -31,7 +32,7 @@ export const MenuTop = () => {
     <div className='menu-top-cont'>
       <img 
       className='menu-top__left-logo' 
-      src={require('../../../assets/img/png/Logos_UAM-09.png')}
+      src={logo}
       >      
       </img>
       <Menu

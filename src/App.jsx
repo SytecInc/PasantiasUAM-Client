@@ -1,6 +1,5 @@
-import './App.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PrivateRoutes } from './utils/PrivateRoutes';
+import { PrivateRoutes } from './middleware/PrivateRoutes';
 import {
   GeneralRoutes,
   AuthRoutes,
